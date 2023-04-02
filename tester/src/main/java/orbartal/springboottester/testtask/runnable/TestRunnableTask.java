@@ -1,12 +1,12 @@
-package orbartal.springboottester.tasktask.runnable;
+package orbartal.springboottester.testtask.runnable;
 
 import java.util.Optional;
 
 import orbartal.springboottester.task.model.RunnableTask;
 import orbartal.springboottester.task.model.TaskReport;
 import orbartal.springboottester.task.model.TaskStatusEnum;
-import orbartal.springboottester.tasktask.model.TestTaskReport;
-import orbartal.springboottester.tasktask.worker.TaskWorker;
+import orbartal.springboottester.testtask.model.TestTaskReport;
+import orbartal.springboottester.testtask.worker.TaskWorker;
 
 public class TestRunnableTask implements RunnableTask {
 

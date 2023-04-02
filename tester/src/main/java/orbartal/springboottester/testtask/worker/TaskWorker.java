@@ -1,4 +1,4 @@
-package orbartal.springboottester.tasktask.worker;
+package orbartal.springboottester.testtask.worker;
 
 import orbartal.springboottester.task.model.TaskReport;
 

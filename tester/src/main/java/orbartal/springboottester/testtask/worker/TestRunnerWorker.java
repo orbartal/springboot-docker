@@ -1,10 +1,10 @@
-package orbartal.springboottester.tasktask.worker;
+package orbartal.springboottester.testtask.worker;
 
 import org.junit.runner.JUnitCore;
 
-import orbartal.springboottester.tasktask.model.TestTaskReport;
 import orbartal.springboottester.test.runner.TestBeanRunner;
 import orbartal.springboottester.test.runner.TestListener;
+import orbartal.springboottester.testtask.model.TestTaskReport;
 
 public class TestRunnerWorker implements TaskWorker<TestTaskReport> {
 

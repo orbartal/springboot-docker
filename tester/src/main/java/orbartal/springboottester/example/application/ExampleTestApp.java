@@ -7,8 +7,8 @@ import orbartal.springboottester.example.test.Test1;
 import orbartal.springboottester.task.api.model.TaskCreateResponseDto;
 import orbartal.springboottester.task.app.TaskAppWriter;
 import orbartal.springboottester.task.model.RunnableTask;
-import orbartal.springboottester.tasktask.runnable.TestRunnableTask;
-import orbartal.springboottester.tasktask.worker.JunitTestWorker;
+import orbartal.springboottester.testtask.runnable.TestRunnableTask;
+import orbartal.springboottester.testtask.worker.JunitTestWorker;
 
 @Component
 public class ExampleTestApp {
