@@ -15,9 +15,9 @@ public class TestExampleController {
 	@Autowired
 	private ExampleTestApp executer;
 
-	@PostMapping(path = "/example/test1", produces = "application/json")
-	public TaskCreateResponseDto test1() {
-		return executer.test1();
+	@PostMapping(path = "/example/test4Results", produces = "application/json")
+	public TaskCreateResponseDto test4Results() {
+		return executer.test4Results();
 	}
 
 }

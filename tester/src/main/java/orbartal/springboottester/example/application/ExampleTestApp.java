@@ -3,7 +3,7 @@ package orbartal.springboottester.example.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import orbartal.springboottester.example.test.Test1;
+import orbartal.springboottester.example.test.Test4Results;
 import orbartal.springboottester.task.api.model.TaskCreateResponseDto;
 import orbartal.springboottester.task.app.TaskAppWriter;
 import orbartal.springboottester.task.model.RunnableTask;
@@ -16,9 +16,9 @@ public class ExampleTestApp {
 	@Autowired
 	private TaskAppWriter taskWriter;
 
-	public TaskCreateResponseDto test1() {
-		JunitTestWorker worker = new JunitTestWorker(Test1.class);
-		RunnableTask task = new TestRunnableTask("test1", worker);
+	public TaskCreateResponseDto test4Results() {
+		JunitTestWorker worker = new JunitTestWorker(Test4Results.class);
+		RunnableTask task = new TestRunnableTask("test4Results", worker);
 		return taskWriter.runTask(task);
 	}
 
