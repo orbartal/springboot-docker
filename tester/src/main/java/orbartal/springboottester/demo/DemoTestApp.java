@@ -3,6 +3,7 @@ package orbartal.springboottester.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import orbartal.springboottester.demo.test.CrudOneValidTest;
 import orbartal.springboottester.task.api.model.TaskCreateResponseDto;
 import orbartal.springboottester.task.app.TaskAppWriter;
 import orbartal.springboottester.task.model.RunnableTask;

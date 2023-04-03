@@ -1,4 +1,4 @@
-package orbartal.springboottester.demo;
+package orbartal.springboottester.demo.test;
 
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.google.gson.Gson;
+
+import orbartal.springboottester.demo.DemoDto;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CrudOneValidTest {
