@@ -13,11 +13,11 @@ public class DemoData {
 
 	private Map<String, DemoDto> demo = new HashMap<>();
 
-	public List<DemoDto> readAll() {
+	public synchronized List<DemoDto> readAll() {
 		return demo.values().stream().sorted((a,b)->a.getKey().compareTo(b.getKey())).toList();
 	}
 
-	public DemoDto readByKey(String key) {
+	public synchronized DemoDto readByKey(String key) {
 		return demo.get(key);
 	}
 
@@ -58,7 +58,7 @@ public class DemoData {
 		demo.remove(key);
 	}
 
-	public void deleteAll() {
+	public synchronized void deleteAll() {
 		demo.clear();
 	}
 
