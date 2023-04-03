@@ -18,6 +18,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.gson.Gson;
 
 import orbartal.springboottester.demo.DemoDto;
+import orbartal.springboottester.demo.util.DemoDtoFactory;
+import orbartal.springboottester.demo.util.DemoUrlProvider;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CrudMultiErrorTest {
@@ -31,7 +33,7 @@ public class CrudMultiErrorTest {
 	private static final String KEY_D1 = "kd1";
 	private static final String VALUE_D1 = "vd1";
 
-	private int port = 8080;
+	private final DemoUrlProvider urlProvider = new DemoUrlProvider();
 
 	private final Gson gson = new Gson();
 	
@@ -40,7 +42,7 @@ public class CrudMultiErrorTest {
 	@Order(0)
 	@Test
 	public void test00DeleteAllStart() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
             .headers("Content-Type", "application/json")
@@ -56,7 +58,7 @@ public class CrudMultiErrorTest {
 	@Order(1)
 	@Test
 	public void test01GetAllEmptyStart() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -71,8 +73,8 @@ public class CrudMultiErrorTest {
 	@Order(2)
 	@Test
     public void test02CreateDemoA() throws Exception {
-		String url = buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_A1, VALUE_A1);
+		String url = urlProvider.buildUrlDemo();
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_A1, VALUE_A1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -90,8 +92,8 @@ public class CrudMultiErrorTest {
 	@Order(3)
 	@Test
     public void test03CreateDemoB() throws Exception {
-		String url = buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_B1, VALUE_B1);
+		String url = urlProvider.buildUrlDemo();
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_B1, VALUE_B1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -109,8 +111,8 @@ public class CrudMultiErrorTest {
 	@Order(4)
 	@Test
     public void test04CreateDemoC() throws Exception {
-		String url = buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_C1, VALUE_C1);
+		String url = urlProvider.buildUrlDemo();
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_C1, VALUE_C1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -129,7 +131,7 @@ public class CrudMultiErrorTest {
 	@Order(5)
 	@Test
     public void test05GetAllDemosAfterCreate() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -159,7 +161,7 @@ public class CrudMultiErrorTest {
 	@Order(6)
 	@Test
     public void test06GetDemoError() throws Exception {
-		String url = buildUrlDemo() + "/" + KEY_D1;
+		String url = urlProvider.buildUrlDemo() + "/" + KEY_D1;
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -171,8 +173,8 @@ public class CrudMultiErrorTest {
 	@Order(7)
 	@Test
     public void test07ReCreateDemoError() throws Exception {
-		String url = buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_C1, VALUE_C1);
+		String url = urlProvider.buildUrlDemo();
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_C1, VALUE_C1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -190,8 +192,8 @@ public class CrudMultiErrorTest {
 	@Order(8)
 	@Test
     public void test08UpdateDemoDError() throws Exception {
-		String url = buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_D1, VALUE_D1);
+		String url = urlProvider.buildUrlDemo();
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_D1, VALUE_D1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -209,7 +211,7 @@ public class CrudMultiErrorTest {
 	@Order(9)
 	@Test
 	 public void test09DeleteDemoD() throws Exception {
-		String url = buildUrlDemo() + "/" + KEY_D1;
+		String url = urlProvider.buildUrlDemo() + "/" + KEY_D1;
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
             .headers("Content-Type", "application/json")
@@ -226,7 +228,7 @@ public class CrudMultiErrorTest {
 	@Order(10)
 	@Test
     public void test10GetAllDemosAfterErrors() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -256,7 +258,7 @@ public class CrudMultiErrorTest {
 	@Order(11)
 	@Test
 	public void test11DeleteAllDemoEnd() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
             .headers("Content-Type", "application/json")
@@ -272,7 +274,7 @@ public class CrudMultiErrorTest {
 	@Order(12)
 	@Test
 	public void test12GetAllDemoEmptyEnd() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -282,16 +284,4 @@ public class CrudMultiErrorTest {
 		Assertions.assertEquals("[]", response.body());
 	}
 
-
-	private String buildUrlDemo() {
-		return "http://localhost:" + port + "/api/demo";
-	}
-
-	private DemoDto buildDemoDto(String key, String value) {
-		DemoDto entity = new DemoDto();
-		entity.setId(System.currentTimeMillis()); // Mock DB generate id
-		entity.setKey(key);
-		entity.setValue(value);
-		return entity;
-	}
 }
