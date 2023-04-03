@@ -2,14 +2,14 @@ package orbartal.springboottester.demo;
 
 public class UrlProvider {
 
-	private int port = 8080;
+	private final String demoUrl = DemoProptiesUtil.getDemoUrl();
 
 	public String buildUrlDemo() {
-		return "http://localhost:" + port + "/api/demo";
+		return demoUrl + "/api/demo";
 	}
 
 	public String buildUrlDemoDelete(String key) {
-		return "http://localhost:" + port + "/api/demo" + "/" + key;
+		return demoUrl + "/api/demo" + "/" + key;
 	}
 
 }
