@@ -18,6 +18,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.gson.Gson;
 
 import orbartal.springboottester.demo.DemoDto;
+import orbartal.springboottester.demo.DemoDtoFactory;
 import orbartal.springboottester.demo.UrlProvider;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -64,7 +65,7 @@ public class CrudOneValidTest {
 	@Test
     public void test2CreateDemo() throws Exception {
 		String url = urlProvider.buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_1, VALUE_1);
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_1, VALUE_1);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -105,7 +106,7 @@ public class CrudOneValidTest {
 	@Test
     public void test4UpdateDemo() throws Exception {
 		String url = urlProvider.buildUrlDemo();
-		DemoDto input = buildDemoDto(KEY_1, VALUE_2);
+		DemoDto input = DemoDtoFactory.buildDemoDto(KEY_1, VALUE_2);
 		String requestBody = gson.toJson(input);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -170,11 +171,5 @@ public class CrudOneValidTest {
 		Assertions.assertEquals("[]", response.body());
 	}
 
-	private DemoDto buildDemoDto(String key, String value) {
-		DemoDto entity = new DemoDto();
-		entity.setId(System.currentTimeMillis()); // Mock DB generate id
-		entity.setKey(key);
-		entity.setValue(value);
-		return entity;
-	}
+
 }
