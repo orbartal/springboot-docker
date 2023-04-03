@@ -33,7 +33,6 @@ public class CrudOneValidTest {
 	@Order(0)
 	@Test
 	public void test0DeleteAllDemo() throws Exception {
-		System.out.println("test0DeleteAllDemo: startTime = " + System.currentTimeMillis());
 		String url = buildUrlDemo();
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
@@ -45,13 +44,11 @@ public class CrudOneValidTest {
         HttpResponse<String> response = HttpClient.newBuilder().build().send(request, handler);
 
 		Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
-		System.out.println("test0DeleteAllDemo: endTime = " + System.currentTimeMillis());
 	}
 
 	@Order(1)
 	@Test
 	public void test1GetAllDemoEmptyBeforeCreate() throws Exception {
-		System.out.println("test1GetAllDemoEmptyBeforeCreate: startTime = " + System.currentTimeMillis());
 		String url = buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
@@ -60,13 +57,11 @@ public class CrudOneValidTest {
 
 		Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
 		Assertions.assertEquals("[]", response.body());
-		System.out.println("test1GetAllDemoEmptyBeforeCreate: endTime = " + System.currentTimeMillis());
 	}
 
 	@Order(2)
 	@Test
     public void test2CreateDemo() throws Exception {
-		System.out.println("test2CreateDemo: startTime = " + System.currentTimeMillis());
 		String url = buildUrlDemo();
 		DemoDto input = buildDemoDto(KEY_1, VALUE_1);
 		String requestBody = gson.toJson(input);
@@ -79,23 +74,19 @@ public class CrudOneValidTest {
 
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
         HttpResponse<String> response = HttpClient.newBuilder().build().send(request, handler);
-		System.out.println("test2CreateDemo: responseTime = " + System.currentTimeMillis());
 
 		Assertions.assertEquals(HttpURLConnection.HTTP_CREATED, response.statusCode());
 		Assertions.assertNotNull(response.body());
-		System.out.println("test2CreateDemo: endTime = " + System.currentTimeMillis());
     }
 
 	@Order(3)
 	@Test
     public void test3GetAllDemosAfterCreate() throws Exception {
-		System.out.println("test3GetAllDemosAfterCreate: startTime = " + System.currentTimeMillis());
 		String url = buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
 		HttpResponse<String> response = HttpClient.newBuilder().build().send(request, handler);
-		System.out.println("test3GetAllDemosAfterCreate: responseTime = " + System.currentTimeMillis());
 
 		Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
 		@SuppressWarnings("rawtypes")
@@ -107,7 +98,6 @@ public class CrudOneValidTest {
 		Map FirstResult =  (Map) output.get(0);
 		Assertions.assertEquals(KEY_1, FirstResult.get("key"));
 		Assertions.assertEquals(VALUE_1, FirstResult.get("value"));
-		System.out.println("test3GetAllDemosAfterCreate: endTime = " + System.currentTimeMillis());
     }
 	
 	@Order(4)
