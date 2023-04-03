@@ -1,4 +1,4 @@
-package orbartal.springboottester.demo;
+package orbartal.springboottester.demo.util;
 
 public class UrlProvider {
 

@@ -18,8 +18,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.gson.Gson;
 
 import orbartal.springboottester.demo.DemoDto;
-import orbartal.springboottester.demo.DemoDtoFactory;
-import orbartal.springboottester.demo.UrlProvider;
+import orbartal.springboottester.demo.util.DemoDtoFactory;
+import orbartal.springboottester.demo.util.UrlProvider;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CrudOneValidTest {

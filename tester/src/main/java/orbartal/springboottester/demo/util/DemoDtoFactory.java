@@ -1,4 +1,6 @@
-package orbartal.springboottester.demo;
+package orbartal.springboottester.demo.util;
+
+import orbartal.springboottester.demo.DemoDto;
 
 public class DemoDtoFactory {
 
