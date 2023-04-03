@@ -10,7 +10,8 @@ import orbartal.springboottester.task.api.model.TaskCreateResponseDto;
 import orbartal.springboottester.task.app.TaskAppWriter;
 import orbartal.springboottester.task.model.RunnableTask;
 import orbartal.springboottester.testtask.runnable.TestRunnableTask;
-import orbartal.springboottester.testtask.worker.RequestTestWorker;
+import orbartal.springboottester.testtask.worker.TestTaskWorker;
+import orbartal.springboottester.testtask.worker.TestTaskWorkerFactory;
 
 @Component
 public class DemoTestApp {
@@ -19,19 +20,19 @@ public class DemoTestApp {
 	private TaskAppWriter taskWriter;
 
 	public TaskCreateResponseDto testCrudOneValid() {
-		RequestTestWorker worker = new RequestTestWorker(CrudOneValidTest.class);
+		TestTaskWorker worker = TestTaskWorkerFactory.fromTestClassWithOrder(CrudOneValidTest.class);
 		RunnableTask task = new TestRunnableTask("testCrudOneValid", worker);
 		return taskWriter.runTask(task);
 	}
 
 	public TaskCreateResponseDto testCrudManyValid() {
-		RequestTestWorker worker = new RequestTestWorker(CrudMultiValidTest.class);
+		TestTaskWorker worker = TestTaskWorkerFactory.fromTestClassWithOrder(CrudMultiValidTest.class);
 		RunnableTask task = new TestRunnableTask("testCrudManyValid", worker);
 		return taskWriter.runTask(task);
 	}
 
 	public TaskCreateResponseDto testCrudManyError() {
-		RequestTestWorker worker = new RequestTestWorker(CrudMultiErrorTest.class);
+		TestTaskWorker worker = TestTaskWorkerFactory.fromTestClassWithOrder(CrudMultiErrorTest.class);
 		RunnableTask task = new TestRunnableTask("testCrudManyError", worker);
 		return taskWriter.runTask(task);
 	}
