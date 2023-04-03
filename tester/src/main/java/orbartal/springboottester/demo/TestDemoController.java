@@ -19,4 +19,9 @@ public class TestDemoController {
 		return executer.testCrudOneValid();
 	}
 
+	@PostMapping(path = "/demo/crud/many/valid", produces = "application/json")
+	public TaskCreateResponseDto testManyValid() {
+		return executer.testCrudManyValid();
+	}
+
 }
