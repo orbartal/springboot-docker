@@ -3,6 +3,7 @@ package orbartal.springboottester.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import orbartal.springboottester.demo.test.CrudMultiErrorTest;
 import orbartal.springboottester.demo.test.CrudMultiValidTest;
 import orbartal.springboottester.demo.test.CrudOneValidTest;
 import orbartal.springboottester.task.api.model.TaskCreateResponseDto;
@@ -26,6 +27,12 @@ public class DemoTestApp {
 	public TaskCreateResponseDto testCrudManyValid() {
 		RequestTestWorker worker = new RequestTestWorker(CrudMultiValidTest.class);
 		RunnableTask task = new TestRunnableTask("testCrudManyValid", worker);
+		return taskWriter.runTask(task);
+	}
+
+	public TaskCreateResponseDto testCrudManyError() {
+		RequestTestWorker worker = new RequestTestWorker(CrudMultiErrorTest.class);
+		RunnableTask task = new TestRunnableTask("testCrudManyError", worker);
 		return taskWriter.runTask(task);
 	}
 
