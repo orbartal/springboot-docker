@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 import orbartal.springboottester.demo.DemoDto;
 import orbartal.springboottester.demo.util.DemoDtoFactory;
-import orbartal.springboottester.demo.util.UrlProvider;
+import orbartal.springboottester.demo.util.DemoUrlProvider;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CrudOneValidTest {
@@ -30,7 +30,7 @@ public class CrudOneValidTest {
 
 	private final Gson gson = new Gson();
 
-	private final UrlProvider urlProvider = new UrlProvider();
+	private final DemoUrlProvider urlProvider = new DemoUrlProvider();
 
 	@Order(0)
 	@Test

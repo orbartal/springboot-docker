@@ -1,6 +1,6 @@
 package orbartal.springboottester.demo.util;
 
-public class UrlProvider {
+public class DemoUrlProvider {
 
 	private final String demoUrl = DemoProptiesUtil.getDemoUrl();
 
