@@ -1,27 +1,25 @@
 package orbartal.springboottester.testtask.worker;
 
-import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
+import org.junit.runner.Runner;
 
 import orbartal.springboottester.test.runner.TestListener;
 import orbartal.springboottester.testtask.model.TestTaskReport;
-import org.junit.runner.Request;
 
 public class RequestTestWorker implements TaskWorker<TestTaskReport> {
 
-	private final Class<?> junitTestClass;
+	private final JunitRunner runner;
 
 	public RequestTestWorker(Class<?> junitTestClass) {
-		this.junitTestClass = junitTestClass;
+		Request request = Request.aClass(junitTestClass).sortWith((t1, t2)->t1.getMethodName().compareTo(t2.getMethodName()));
+		Runner runner1 = request.getRunner();
+		this.runner = new JunitRunner(runner1);
 	}
 
 	@Override
 	public TestTaskReport work() {
-		//TODO: improve
-		Request request = Request.aClass(junitTestClass).sortWith((t1, t2)->t1.getMethodName().compareTo(t2.getMethodName()));
 		TestListener listener = new TestListener();
-		JUnitCore junit = new JUnitCore();
-		junit.addListener(listener);
-		junit.run(request);
+		runner.run(listener);
 		return new TestTaskReport(listener.getReport());
 	}
 
