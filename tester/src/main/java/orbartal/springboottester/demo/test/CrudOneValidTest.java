@@ -18,6 +18,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.gson.Gson;
 
 import orbartal.springboottester.demo.DemoDto;
+import orbartal.springboottester.demo.UrlProvider;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CrudOneValidTest {
@@ -26,14 +27,14 @@ public class CrudOneValidTest {
 	private static final String VALUE_1 = "va1";
 	private static final String VALUE_2 = "va2";
 
-	private int port = 8080;
-
 	private final Gson gson = new Gson();
+
+	private final UrlProvider urlProvider = new UrlProvider();
 
 	@Order(0)
 	@Test
 	public void test0DeleteAllDemo() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
             .headers("Content-Type", "application/json")
@@ -49,7 +50,7 @@ public class CrudOneValidTest {
 	@Order(1)
 	@Test
 	public void test1GetAllDemoEmptyBeforeCreate() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -62,7 +63,7 @@ public class CrudOneValidTest {
 	@Order(2)
 	@Test
     public void test2CreateDemo() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		DemoDto input = buildDemoDto(KEY_1, VALUE_1);
 		String requestBody = gson.toJson(input);
 
@@ -82,7 +83,7 @@ public class CrudOneValidTest {
 	@Order(3)
 	@Test
     public void test3GetAllDemosAfterCreate() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -103,7 +104,7 @@ public class CrudOneValidTest {
 	@Order(4)
 	@Test
     public void test4UpdateDemo() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		DemoDto input = buildDemoDto(KEY_1, VALUE_2);
 		String requestBody = gson.toJson(input);
 
@@ -123,7 +124,7 @@ public class CrudOneValidTest {
 	@Order(5)
 	@Test
     public void test5GetAllDemosAfterUpdate() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -143,7 +144,7 @@ public class CrudOneValidTest {
 	@Order(6)
 	@Test
 	 public void test6DeleteDemo() throws Exception {
-		String url = buildUrlDemo() + "/" + KEY_1;
+		String url = urlProvider.buildUrlDemoDelete(KEY_1);
         HttpRequest request = HttpRequest.newBuilder()
         	.uri(new URI(url))
             .headers("Content-Type", "application/json")
@@ -159,7 +160,7 @@ public class CrudOneValidTest {
 	@Order(7)
 	@Test
 	public void test7GetAllDemoEmptyAfterDelete() throws Exception {
-		String url = buildUrlDemo();
+		String url = urlProvider.buildUrlDemo();
 		HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
 		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
 
@@ -167,10 +168,6 @@ public class CrudOneValidTest {
 
 		Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
 		Assertions.assertEquals("[]", response.body());
-	}
-
-	private String buildUrlDemo() {
-		return "http://localhost:" + port + "/api/demo";
 	}
 
 	private DemoDto buildDemoDto(String key, String value) {
